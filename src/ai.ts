@@ -10,7 +10,7 @@ try {
 }
 
 // Si este modelo no está disponible para tu cuenta, cámbialo aquí.
-export const MODELO = 'gemini-3.8-flash';
+export const MODELO = 'gemini-3.1-flash-lite';
 
 export const ai = genkit({
   plugins: [googleAI()],
