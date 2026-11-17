@@ -1,0 +1,12 @@
+[
+  { "id": "arco-parabolico", "nombre": "Arco Parabólico", "intereses": ["HISTORIA"], "zona": "Centro" },
+  { "id": "catedral", "nombre": "Catedral de Tacna", "intereses": ["HISTORIA"], "zona": "Centro" },
+  { "id": "pileta-ornamental", "nombre": "Pileta Ornamental", "intereses": ["HISTORIA"], "zona": "Centro" },
+  { "id": "museo-ferroviario", "nombre": "Museo Ferroviario", "intereses": ["HISTORIA"], "zona": "Centro" },
+  { "id": "paseo-civico", "nombre": "Paseo Cívico", "intereses": ["HISTORIA"], "zona": "Centro" },
+  { "id": "casa-zela", "nombre": "Casa de Zela", "intereses": ["HISTORIA"], "zona": "Centro" },
+  { "id": "parque-locomotora", "nombre": "Parque de la Locomotora", "intereses": ["HISTORIA"], "zona": "Centro" },
+  { "id": "mercado-central", "nombre": "Mercado Central", "intereses": ["GASTRONOMIA"], "zona": "Centro" },
+  { "id": "picanteria", "nombre": "Picantería tradicional (ejemplo)", "intereses": ["GASTRONOMIA"], "zona": "Centro" },
+  { "id": "dulceria", "nombre": "Dulcería tradicional (ejemplo)", "intereses": ["GASTRONOMIA"], "zona": "Centro" }
+]
