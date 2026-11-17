@@ -18,20 +18,23 @@ npm run check            # debe terminar en "Todo listo"
 
 Crea tu API key en https://aistudio.google.com/apikey. Es personal: no la compartas ni la subas a GitHub (`.env` ya está ignorado).
 
-## Ramas (puntos de control)
+## Ramas (solo si te pierdes)
 
-Si te atrasas, cambia de rama y sigue desde ahí:
+En el workshop construimos el proyecto paso a paso. Las otras ramas son respaldos: úsalas únicamente si te atrasas.
 
 | Rama | Qué contiene |
 |---|---|
-| `step-0-start` | Punto de partida: configuración de Genkit, catálogo `lugares.json`, `spec-vaga.md` |
-| `step-1-spec` | + `spec.md` completa |
+| `step-0-start` | Punto de partida (esta rama): config de Genkit, catálogo, `spec-vaga.md` |
+| `step-1-spec` | + `spec.md` |
 | `step-2-backend` | + esquemas Zod, tool `buscarLugares` y `guiaTacnaFlow` |
 | `step-3-tests` | + pruebas (`npm test`) |
-| `final` | + reto: interés `NATURALEZA` y máximo 4 actividades por día |
+| `final` | + reto: `NATURALEZA` y máximo 4 actividades |
+
+Sin cambiar de rama, trae solo lo que te falta:
 
 ```bash
-git checkout step-2-backend
+git checkout step-1-spec -- spec.md
+git checkout step-2-backend -- src
 ```
 
 ## Comandos
