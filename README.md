@@ -9,8 +9,8 @@ Recibe días e intereses y devuelve un itinerario por día usando **solo** los l
 Necesitas: Node 20 o superior, Git y Antigravity con sesión iniciada.
 
 ```bash
-git clone <URL-DEL-REPO>
-cd guia-tacna-starter
+git clone https://github.com/napsterh/sdd-gdg-tacna-2026.git
+cd sdd-gdg-tacna-2026
 npm install
 cp .env.example .env     # pega tu API key de Google AI Studio en .env
 npm run check            # debe terminar en "Todo listo"
