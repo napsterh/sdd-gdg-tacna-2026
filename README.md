@@ -18,23 +18,12 @@ npm run check            # debe terminar en "Todo listo"
 
 Crea tu API key en https://aistudio.google.com/apikey. Es personal: no la compartas ni la subas a GitHub (`.env` ya está ignorado).
 
-## Ramas (solo si te pierdes)
+## Si te pierdes
 
-En el workshop construimos el proyecto paso a paso. Las otras ramas son respaldos: úsalas únicamente si te atrasas.
-
-| Rama | Qué contiene |
-|---|---|
-| `step-0-start` | Punto de partida (esta rama): config de Genkit, catálogo, `spec-vaga.md` |
-| `step-1-spec` | + `spec.md` |
-| `step-2-backend` | + esquemas Zod, tool `buscarLugares` y `guiaTacnaFlow` |
-| `step-3-tests` | + pruebas (`npm test`) |
-| `final` | + reto: `NATURALEZA` y máximo 4 actividades |
-
-Sin cambiar de rama, trae solo lo que te falta:
+Durante el workshop construimos el proyecto paso a paso. Si te atrasas, el instructor publicará una rama de respaldo en esta página cuando llegue a cada etapa. Para saber en qué paso vas:
 
 ```bash
-git checkout step-1-spec -- spec.md
-git checkout step-2-backend -- src
+npm run paso
 ```
 
 ## Comandos
@@ -42,6 +31,7 @@ git checkout step-2-backend -- src
 | Comando | Qué hace |
 |---|---|
 | `npm run check` | Verifica Node, API key y conexión con Gemini |
+| `npm run paso` | Te dice en qué paso vas y cuál sigue |
 | `npm run genkit:ui` | Abre la Dev UI de Genkit en http://localhost:4000 |
 | `npm test` | Ejecuta las pruebas |
 | `npm run typecheck` | Revisa los tipos de TypeScript |

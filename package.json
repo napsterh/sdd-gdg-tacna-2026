@@ -9,6 +9,7 @@
   },
   "scripts": {
     "check": "tsx scripts/check.ts",
+    "paso": "tsx scripts/paso.ts",
     "genkit:ui": "genkit start -- tsx --watch src/index.ts",
     "test": "node --import tsx --test test/*.test.ts",
     "typecheck": "tsc --noEmit"
