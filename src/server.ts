@@ -29,6 +29,19 @@ createServer(async (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }).end(pagina());
     return;
   }
+  if (req.method === 'GET' && req.url === '/lugares.json') {
+    res.writeHead(200, { 'Content-Type': 'application/json' }).end(readFileSync(new URL('../lugares.json', import.meta.url)));
+    return;
+  }
+  const img = req.method === 'GET' ? /^\/img\/([\w-]+\.svg)$/.exec(req.url ?? '') : null;
+  if (img) {
+    try {
+      res.writeHead(200, { 'Content-Type': 'image/svg+xml' }).end(readFileSync(new URL(`../public/img/${img[1]}`, import.meta.url)));
+    } catch {
+      res.writeHead(404).end('No encontrado');
+    }
+    return;
+  }
   if (req.method === 'POST' && req.url === '/api/guia') {
     try {
       const flow = await cargarFlow();

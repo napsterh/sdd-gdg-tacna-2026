@@ -5,43 +5,65 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Guía de Tacna</title>
 <style>
-  :root { --bg:#f4f4f2; --card:#fff; --ink:#1e1e1e; --muted:#5f6368; --line:#d9d9d4; --accent:#1a73e8; --ok:#e6f4ea; --err:#fce8e6; }
-  @media (prefers-color-scheme: dark) { :root { --bg:#16181b; --card:#202327; --ink:#f1f1ef; --muted:#a3a8ae; --line:#34383d; --accent:#8ab4f8; --ok:#1e3326; --err:#3b2222; } }
+  :root { --bg:#fff7ee; --card:#fff; --ink:#2a1c42; --muted:#6f6483; --line:#f0e1d0; --accent:#e0527a; --accent2:#ff9a52; --ok:#e3f6e8; --err:#fde4e4; --okink:#14602b; --errink:#9b1c1c; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#17102a; --card:#241a3d; --ink:#f6efff; --muted:#b5a9cc; --line:#3a2d5c; --ok:#17352a; --err:#43202a; --okink:#9be3b4; --errink:#ffb4b4; } }
   * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); color:var(--ink); font:18px/1.5 system-ui,sans-serif; }
-  main { max-width:760px; margin:0 auto; padding:32px 20px 60px; }
-  h1 { margin:0 0 4px; font-size:34px; }
-  .sub { color:var(--muted); margin:0 0 24px; }
-  form, .dia, .aviso { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; }
-  .fila { display:flex; flex-wrap:wrap; gap:18px; align-items:center; margin-bottom:16px; }
-  label { display:flex; gap:8px; align-items:center; cursor:pointer; }
-  input[type=number] { width:70px; font:inherit; padding:6px 8px; border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--ink); }
-  button { font:inherit; font-weight:600; padding:12px 22px; border:0; border-radius:12px; background:var(--accent); color:#fff; cursor:pointer; }
-  @media (prefers-color-scheme: dark) { button { color:#111; } }
-  button:disabled { opacity:.6; cursor:wait; }
-  #salida { margin-top:24px; display:grid; gap:14px; }
-  .dia h2 { margin:0 0 10px; font-size:22px; }
-  .act { padding:10px 0; border-top:1px solid var(--line); }
-  .act:first-of-type { border-top:0; }
-  .lugar { font-weight:600; }
-  .momento { font-size:13px; letter-spacing:.04em; color:var(--muted); margin-left:8px; }
-  .motivo { color:var(--muted); margin:2px 0 0; }
-  .aviso.ok { background:var(--ok); }
-  .aviso.err { background:var(--err); }
-  .meta { color:var(--muted); font-size:14px; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:17px/1.5 "Trebuchet MS", "Segoe UI", system-ui, sans-serif; }
+  header { position:relative; height:300px; overflow:hidden; color:#fff; }
+  header img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  header::after { content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(23,16,42,.65), rgba(23,16,42,0) 70%); }
+  .titulo { position:absolute; z-index:1; left:0; right:0; bottom:26px; max-width:780px; margin:0 auto; padding:0 20px; }
+  h1 { margin:0; font-size:42px; letter-spacing:-.5px; text-shadow:0 2px 12px rgba(0,0,0,.35); }
+  .sub { margin:4px 0 0; opacity:.95; font-size:18px; }
+  main { max-width:780px; margin:-34px auto 0; padding:0 20px 60px; position:relative; z-index:2; }
+  form, .dia, .aviso { background:var(--card); border:1px solid var(--line); border-radius:20px; padding:22px; box-shadow:0 10px 30px rgba(42,28,66,.12); }
+  .fila { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-bottom:16px; }
+  .fila > span { font-weight:700; margin-right:4px; }
+  input[type=number] { width:76px; font:inherit; font-weight:700; text-align:center; padding:8px; border:2px solid var(--line); border-radius:12px; background:var(--bg); color:var(--ink); }
+  .chip { position:relative; cursor:pointer; }
+  .chip input { position:absolute; opacity:0; inset:0; cursor:pointer; }
+  .chip span { display:flex; align-items:center; gap:10px; padding:6px 16px 6px 6px; border:2px solid var(--line); border-radius:16px; font-weight:700; background:var(--bg); transition:.15s; }
+  .chip img { width:38px; height:38px; }
+  .chip input:checked + span { border-color:var(--accent); background:#fff0f4; color:#7a1840; box-shadow:0 4px 14px rgba(224,82,122,.25); }
+  .chip input:focus-visible + span { outline:3px solid var(--accent2); }
+  button { font:inherit; font-weight:700; font-size:18px; padding:14px 26px; border:0; border-radius:14px; color:#fff; cursor:pointer; background:linear-gradient(135deg,var(--accent),var(--accent2)); box-shadow:0 8px 20px rgba(224,82,122,.35); transition:transform .12s; }
+  button:hover { transform:translateY(-2px); }
+  button:disabled { opacity:.65; cursor:wait; transform:none; }
+  #salida { margin-top:24px; display:grid; gap:16px; }
+  .dia { padding:0; overflow:hidden; }
+  .dia h2 { margin:0; padding:12px 22px; font-size:20px; color:#fff; background:linear-gradient(135deg,#6a4c93,var(--accent)); }
+  .act { display:flex; gap:14px; align-items:flex-start; padding:16px 22px; border-top:1px solid var(--line); }
+  .dia h2 + .act { border-top:0; }
+  .act img { width:46px; height:46px; flex:none; }
+  .lugar { font-weight:700; font-size:18px; }
+  .momento { display:inline-block; margin-left:8px; padding:1px 10px; border-radius:999px; font-size:13px; font-weight:700; background:#ffe7a5; color:#6b4600; }
+  .motivo { color:var(--muted); margin:4px 0 0; }
+  .aviso { box-shadow:none; }
+  .aviso.ok { background:var(--ok); color:var(--okink); border-color:transparent; font-weight:600; }
+  .aviso.err { background:var(--err); color:var(--errink); border-color:transparent; font-weight:600; }
+  .meta { color:var(--muted); font-size:14px; text-align:center; }
+  .carga { text-align:center; color:var(--muted); }
+  .carga::before { content:"🌄 "; }
 </style>
 </head>
 <body>
+<header>
+  <img src="/img/hero.svg" alt="Arco Parabólico de Tacna al atardecer">
+  <div class="titulo">
+    <h1>Guía de Tacna</h1>
+    <p class="sub">Dime cuántos días y qué te gusta. Solo uso lugares del catálogo.</p>
+  </div>
+</header>
 <main>
-  <h1>Guía de Tacna</h1>
-  <p class="sub">Dime cuántos días y qué te gusta. Solo uso lugares del catálogo.</p>
   <form id="f">
     <div class="fila">
-      <label>Días <input id="dias" type="number" min="0" max="9" value="2"></label>
+      <span>¿Cuántos días?</span>
+      <input id="dias" type="number" min="0" max="9" value="2" aria-label="Días">
     </div>
     <div class="fila" id="intereses">
-      <label><input type="checkbox" value="HISTORIA" checked> Historia</label>
-      <label><input type="checkbox" value="GASTRONOMIA"> Gastronomía</label>
+      <span>¿Qué te gusta?</span>
+      <label class="chip"><input type="checkbox" value="HISTORIA" checked><span><img src="/img/historia.svg" alt="">Historia</span></label>
+      <label class="chip"><input type="checkbox" value="GASTRONOMIA"><span><img src="/img/gastronomia.svg" alt="">Gastronomía</span></label>
     </div>
     <button id="boton" type="submit">Armar mi itinerario</button>
   </form>
@@ -50,27 +72,32 @@
 <script>
 const $ = (id) => document.getElementById(id);
 const crear = (tag, clase, texto) => { const e = document.createElement(tag); if (clase) e.className = clase; if (texto !== undefined) e.textContent = texto; return e; };
+const ICONO_MOMENTO = { MANANA: '☀️ Mañana', TARDE: '🌇 Tarde', NOCHE: '🌙 Noche' };
+// El catálogo solo se usa para elegir el icono de cada lugar.
+const tipoPorLugar = fetch('/lugares.json').then((r) => r.json()).then((l) => Object.fromEntries(l.map((x) => [x.nombre, x.intereses[0]]))).catch(() => ({}));
 $('f').addEventListener('submit', async (ev) => {
   ev.preventDefault();
   const salida = $('salida'); salida.replaceChildren();
   const intereses = [...document.querySelectorAll('#intereses input:checked')].map((i) => i.value);
-  $('boton').disabled = true; salida.append(crear('div', 'aviso', 'Preguntando a Gemini…'));
+  $('boton').disabled = true; salida.append(crear('div', 'aviso carga', 'Preguntando a Gemini…'));
   const t0 = performance.now();
   try {
     const r = await fetch('/api/guia', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ dias: Number($('dias').value), intereses }) });
     const datos = await r.json();
+    const tipos = await tipoPorLugar;
     salida.replaceChildren();
     if (!r.ok) { salida.append(crear('div', 'aviso err', 'No pasó: ' + datos.error)); return; }
     for (const d of datos.dias) {
       const tarjeta = crear('div', 'dia'); tarjeta.append(crear('h2', '', 'Día ' + d.dia));
       for (const a of d.actividades) {
         const fila = crear('div', 'act'); const t = crear('div');
-        t.append(crear('span', 'lugar', a.lugar), crear('span', 'momento', a.momento));
-        fila.append(t, crear('p', 'motivo', a.motivo)); tarjeta.append(fila);
+        const icono = crear('img'); icono.alt = ''; icono.src = tipos[a.lugar] === 'GASTRONOMIA' ? '/img/gastronomia.svg' : '/img/historia.svg';
+        t.append(crear('span', 'lugar', a.lugar), crear('span', 'momento', ICONO_MOMENTO[a.momento] ?? a.momento));
+        t.append(crear('p', 'motivo', a.motivo)); fila.append(icono, t); tarjeta.append(fila);
       }
       salida.append(tarjeta);
     }
-    salida.append(crear('div', 'aviso ok', 'Consejo: ' + datos.consejo));
+    salida.append(crear('div', 'aviso ok', '💡 Consejo: ' + datos.consejo));
     salida.append(crear('div', 'meta', 'Respondió en ' + ((performance.now() - t0) / 1000).toFixed(1) + ' s'));
   } catch (e) {
     salida.replaceChildren(crear('div', 'aviso err', 'No se pudo conectar: ' + e.message));
