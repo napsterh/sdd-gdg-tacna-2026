@@ -1,4 +1,4 @@
-# Guía de Tacna — Workshop GDG Tacna
+# Tacna Trip — Workshop GDG Tacna
 
 **Del Vibe Coding al SDD:** escribimos un spec, Antigravity lo implementa con Firebase Genkit y Gemini, y lo probamos en una página web viendo en Genkit qué valida y qué rechaza.
 

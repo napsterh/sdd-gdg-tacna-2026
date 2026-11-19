@@ -1,4 +1,4 @@
-// Página web de la Guía de Tacna. Ejecuta: npm run web
+// Página web de la Tacna Trip. Ejecuta: npm run web
 // -> página en http://localhost:3000 y Dev UI de Genkit en http://localhost:4000
 import { readFileSync } from 'node:fs';
 import { createServer, type IncomingMessage } from 'node:http';
@@ -17,7 +17,7 @@ const leerJson = async (req: IncomingMessage) => {
 const cargarFlow = async () => {
   const ruta = './flow.js';
   try {
-    return (await import(ruta)).guiaTacnaFlow;
+    return (await import(ruta)).tacnaTripFlow;
   } catch (e) {
     if ((e as { code?: string }).code === 'ERR_MODULE_NOT_FOUND' && String(e).includes('flow')) return null;
     throw e;
@@ -58,4 +58,4 @@ createServer(async (req, res) => {
     return;
   }
   res.writeHead(404).end('No encontrado');
-}).listen(PUERTO, () => console.log(`Guía de Tacna en http://localhost:${PUERTO}`));
+}).listen(PUERTO, () => console.log(`Tacna Trip en http://localhost:${PUERTO}`));
