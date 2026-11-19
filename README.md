@@ -1,8 +1,6 @@
 # Guía de Tacna — Workshop GDG Tacna
 
-**Del Vibe Coding al SDD:** construimos una API con Spec-Driven Development, Firebase Genkit, Gemini y Antigravity.
-
-Recibe días e intereses y devuelve un itinerario por día usando **solo** los lugares de `lugares.json`.
+**Del Vibe Coding al SDD:** escribimos un spec, Antigravity lo implementa con Firebase Genkit y Gemini, y lo probamos en una página web viendo en Genkit qué valida y qué rechaza.
 
 ## Antes del workshop
 
@@ -20,11 +18,11 @@ Crea tu API key en https://aistudio.google.com/apikey. Es personal: no la compar
 
 ## Si te pierdes
 
-Durante el workshop construimos el proyecto paso a paso. Si te atrasas, el instructor publicará una rama de respaldo en esta página cuando llegue a cada etapa. Para saber en qué paso vas:
-
 ```bash
 npm run paso
 ```
+
+Te dice en qué paso vas y cuál sigue. Si te atrasas, el instructor publicará una rama de respaldo en esta página.
 
 ## Comandos
 
@@ -32,8 +30,7 @@ npm run paso
 |---|---|
 | `npm run check` | Verifica Node, API key y conexión con Gemini |
 | `npm run paso` | Te dice en qué paso vas y cuál sigue |
-| `npm run genkit:ui` | Abre la Dev UI de Genkit en http://localhost:4000 |
-| `npm test` | Ejecuta las pruebas |
+| `npm run web` | Abre la página (http://localhost:3000) y la Dev UI de Genkit (http://localhost:4000) |
 | `npm run typecheck` | Revisa los tipos de TypeScript |
 
 ## Cambiar el modelo

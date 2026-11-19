@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía de Tacna</title>
+<style>
+  :root { --bg:#f4f4f2; --card:#fff; --ink:#1e1e1e; --muted:#5f6368; --line:#d9d9d4; --accent:#1a73e8; --ok:#e6f4ea; --err:#fce8e6; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#16181b; --card:#202327; --ink:#f1f1ef; --muted:#a3a8ae; --line:#34383d; --accent:#8ab4f8; --ok:#1e3326; --err:#3b2222; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:18px/1.5 system-ui,sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:32px 20px 60px; }
+  h1 { margin:0 0 4px; font-size:34px; }
+  .sub { color:var(--muted); margin:0 0 24px; }
+  form, .dia, .aviso { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; }
+  .fila { display:flex; flex-wrap:wrap; gap:18px; align-items:center; margin-bottom:16px; }
+  label { display:flex; gap:8px; align-items:center; cursor:pointer; }
+  input[type=number] { width:70px; font:inherit; padding:6px 8px; border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--ink); }
+  button { font:inherit; font-weight:600; padding:12px 22px; border:0; border-radius:12px; background:var(--accent); color:#fff; cursor:pointer; }
+  @media (prefers-color-scheme: dark) { button { color:#111; } }
+  button:disabled { opacity:.6; cursor:wait; }
+  #salida { margin-top:24px; display:grid; gap:14px; }
+  .dia h2 { margin:0 0 10px; font-size:22px; }
+  .act { padding:10px 0; border-top:1px solid var(--line); }
+  .act:first-of-type { border-top:0; }
+  .lugar { font-weight:600; }
+  .momento { font-size:13px; letter-spacing:.04em; color:var(--muted); margin-left:8px; }
+  .motivo { color:var(--muted); margin:2px 0 0; }
+  .aviso.ok { background:var(--ok); }
+  .aviso.err { background:var(--err); }
+  .meta { color:var(--muted); font-size:14px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Guía de Tacna</h1>
+  <p class="sub">Dime cuántos días y qué te gusta. Solo uso lugares del catálogo.</p>
+  <form id="f">
+    <div class="fila">
+      <label>Días <input id="dias" type="number" min="0" max="9" value="2"></label>
+    </div>
+    <div class="fila" id="intereses">
+      <label><input type="checkbox" value="HISTORIA" checked> Historia</label>
+      <label><input type="checkbox" value="GASTRONOMIA"> Gastronomía</label>
+    </div>
+    <button id="boton" type="submit">Armar mi itinerario</button>
+  </form>
+  <div id="salida" aria-live="polite"></div>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const crear = (tag, clase, texto) => { const e = document.createElement(tag); if (clase) e.className = clase; if (texto !== undefined) e.textContent = texto; return e; };
+$('f').addEventListener('submit', async (ev) => {
+  ev.preventDefault();
+  const salida = $('salida'); salida.replaceChildren();
+  const intereses = [...document.querySelectorAll('#intereses input:checked')].map((i) => i.value);
+  $('boton').disabled = true; salida.append(crear('div', 'aviso', 'Preguntando a Gemini…'));
+  const t0 = performance.now();
+  try {
+    const r = await fetch('/api/guia', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ dias: Number($('dias').value), intereses }) });
+    const datos = await r.json();
+    salida.replaceChildren();
+    if (!r.ok) { salida.append(crear('div', 'aviso err', 'No pasó: ' + datos.error)); return; }
+    for (const d of datos.dias) {
+      const tarjeta = crear('div', 'dia'); tarjeta.append(crear('h2', '', 'Día ' + d.dia));
+      for (const a of d.actividades) {
+        const fila = crear('div', 'act'); const t = crear('div');
+        t.append(crear('span', 'lugar', a.lugar), crear('span', 'momento', a.momento));
+        fila.append(t, crear('p', 'motivo', a.motivo)); tarjeta.append(fila);
+      }
+      salida.append(tarjeta);
+    }
+    salida.append(crear('div', 'aviso ok', 'Consejo: ' + datos.consejo));
+    salida.append(crear('div', 'meta', 'Respondió en ' + ((performance.now() - t0) / 1000).toFixed(1) + ' s'));
+  } catch (e) {
+    salida.replaceChildren(crear('div', 'aviso err', 'No se pudo conectar: ' + e.message));
+  } finally { $('boton').disabled = false; }
+});
+</script>
+</body>
+</html>
