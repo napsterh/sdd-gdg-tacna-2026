@@ -4,9 +4,9 @@ import { existsSync, readFileSync } from 'node:fs';
 const hay = (ruta: string) => existsSync(ruta);
 const tiene = (ruta: string, texto: string) => hay(ruta) && readFileSync(ruta, 'utf8').includes(texto);
 
-let envOk = false;
+let envOk = Boolean(process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY);
 try {
-  envOk = /GEMINI_API_KEY=\S+/.test(readFileSync('.env', 'utf8'));
+  envOk = envOk || /GEMINI_API_KEY=\S+/.test(readFileSync('.env', 'utf8'));
 } catch {}
 
 const pasos: { nombre: string; hecho: boolean; falta: string }[] = [
