@@ -20,6 +20,7 @@
   .fila { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-bottom:16px; }
   .fila > span { font-weight:700; margin-right:4px; }
   input[type=number] { width:76px; font:inherit; font-weight:700; text-align:center; padding:8px; border:2px solid var(--line); border-radius:12px; background:var(--bg); color:var(--ink); }
+  .max { color:var(--muted); font-size:14px; }
   .chip { position:relative; cursor:pointer; }
   .chip input { position:absolute; opacity:0; inset:0; cursor:pointer; }
   .chip span { display:flex; align-items:center; gap:10px; padding:6px 16px 6px 6px; border:2px solid var(--line); border-radius:16px; font-weight:700; background:var(--bg); transition:.15s; }
@@ -59,11 +60,14 @@
     <div class="fila">
       <span>¿Cuántos días?</span>
       <input id="dias" type="number" min="0" max="9" value="2" aria-label="Días">
+      <small class="max">Máximo 4 días</small>
     </div>
     <div class="fila" id="intereses">
       <span>¿Qué te gusta?</span>
       <label class="chip"><input type="checkbox" value="HISTORIA" checked><span><img src="/img/historia.svg" alt="">Historia</span></label>
       <label class="chip"><input type="checkbox" value="GASTRONOMIA"><span><img src="/img/gastronomia.svg" alt="">Gastronomía</span></label>
+      <label class="chip"><input type="checkbox" value="NATURALEZA"><span><img src="/img/naturaleza.svg" alt="">Naturaleza</span></label>
+      <label class="chip"><input type="checkbox" value="COMPRAS"><span><img src="/img/compras.svg" alt="">Compras</span></label>
     </div>
     <button id="boton" type="submit">Armar mi itinerario</button>
   </form>
@@ -91,7 +95,7 @@ $('f').addEventListener('submit', async (ev) => {
       const tarjeta = crear('div', 'dia'); tarjeta.append(crear('h2', '', 'Día ' + d.dia));
       for (const a of d.actividades) {
         const fila = crear('div', 'act'); const t = crear('div');
-        const icono = crear('img'); icono.alt = ''; icono.src = tipos[a.lugar] === 'GASTRONOMIA' ? '/img/gastronomia.svg' : '/img/historia.svg';
+        const icono = crear('img'); icono.alt = ''; icono.src = '/img/' + String(tipos[a.lugar] ?? 'HISTORIA').toLowerCase() + '.svg';
         t.append(crear('span', 'lugar', a.lugar), crear('span', 'momento', ICONO_MOMENTO[a.momento] ?? a.momento));
         t.append(crear('p', 'motivo', a.motivo)); fila.append(icono, t); tarjeta.append(fila);
       }

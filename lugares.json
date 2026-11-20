@@ -8,5 +8,10 @@
   { "id": "parque-locomotora", "nombre": "Parque de la Locomotora", "intereses": ["HISTORIA"], "zona": "Centro" },
   { "id": "mercado-central", "nombre": "Mercado Central", "intereses": ["GASTRONOMIA"], "zona": "Centro" },
   { "id": "picanteria", "nombre": "Picantería tradicional (ejemplo)", "intereses": ["GASTRONOMIA"], "zona": "Centro" },
-  { "id": "dulceria", "nombre": "Dulcería tradicional (ejemplo)", "intereses": ["GASTRONOMIA"], "zona": "Centro" }
+  { "id": "dulceria", "nombre": "Dulcería tradicional (ejemplo)", "intereses": ["GASTRONOMIA"], "zona": "Centro" },
+  { "id": "termas-calientes", "nombre": "Termas de Calientes", "intereses": ["NATURALEZA"], "zona": "Periferia" },
+  { "id": "boca-del-rio", "nombre": "Playa Boca del Río", "intereses": ["NATURALEZA"], "zona": "Costa" },
+  { "id": "cerro-intiorko", "nombre": "Cerro Intiorko", "intereses": ["NATURALEZA"], "zona": "Periferia" },
+  { "id": "zofratacna", "nombre": "Zofratacna", "intereses": ["COMPRAS"], "zona": "Periferia" },
+  { "id": "avenida-bolognesi", "nombre": "Avenida Bolognesi", "intereses": ["COMPRAS"], "zona": "Centro" }
 ]
