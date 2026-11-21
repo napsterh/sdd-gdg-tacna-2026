@@ -36,3 +36,65 @@ Te dice en qué paso vas y cuál sigue. Si te atrasas, el instructor publicará 
 ## Cambiar el modelo
 
 El modelo está en `src/ai.ts` (`MODELO`). Si tu cuenta no tiene acceso a ese modelo, cámbialo por otro de Gemini.
+
+## Guía del spec (workshop)
+
+Sigue las slides: crea `spec.md` y ve añadiendo estos 5 bloques, en orden.
+
+### Spec: qué hace y qué entra
+Crea spec.md en la raíz del proyecto y escribe esto.
+
+```markdown
+# Tacna Trip
+
+Recibe días e intereses y devuelve un itinerario usando solo los lugares de `lugares.json`.
+
+## Entrada
+- `dias`: número de 1 a 4.
+- `intereses`: uno o más de `HISTORIA`, `GASTRONOMIA`, `NATURALEZA`, `COMPRAS`.
+```
+
+### Spec: qué sale
+Añade al final de spec.md.
+
+```markdown
+## Salida
+- `dias`: una lista con un elemento por día pedido.
+  - `dia`: número.
+  - `actividades`: lista de `{ lugar, momento, motivo }`, con `momento` = `MANANA` | `TARDE` | `NOCHE`.
+- `consejo`: una frase útil.
+```
+
+### Spec: las reglas
+Añade al final de spec.md.
+
+```markdown
+## Reglas
+1. Solo lugares que existen en `lugares.json`.
+2. Máximo 3 actividades por día.
+3. Cada actividad coincide con un interés pedido.
+4. Si la entrada no es válida, se rechaza sin llamar a Gemini.
+```
+
+### Spec: cómo se construye
+Añade al final de spec.md.
+
+```markdown
+## Cómo se construye
+- Un solo flow de Genkit llamado `tacnaTripFlow`, en `src/flow.ts`.
+- Usa la instancia `ai` de `src/ai.ts`.
+- Lee `lugares.json` y se lo da a Gemini como lista de lugares permitidos.
+- Acepta cualquier número en `dias` y valida dentro del flow.
+- Dos pasos con nombre, con `ai.run`: `validarEntrada` (antes de llamar a Gemini) y `validarReglas` (después).
+```
+
+### Spec: cómo se comprueba
+Estas son las pruebas que haremos al final. Añádelas y guarda spec.md.
+
+```markdown
+## Criterios
+- [ ] 2 días e HISTORIA: devuelve 2 días con lugares del catálogo.
+- [ ] 5 días: se rechaza en `validarEntrada`, sin llamar a Gemini.
+- [ ] Sin intereses: se rechaza en `validarEntrada`.
+- [ ] Ningún día tiene más de 3 actividades.
+```
